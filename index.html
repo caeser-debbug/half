@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Rayanatou ♥ Mon Amour Éternel</title>
+    <style>
+        /* Styles principaux */
+        body {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f9f3f3, #f0e4e4);
+            color: #4a4a4a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        /* Animation cœur battant */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animation des cœurs flottants */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(20deg); opacity: 0; }
+        }
+        
+        /* Écran de chargement */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8c1c9, #e8a2b3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 1s ease-out;
+        }
+        
+        .heart-loader {
+            font-size: 5rem;
+            color: #fff;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+        
+        .loading-text {
+            font-size: 1.5rem;
+            color: white;
+            text-align: center;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, #e66d89, #cc5476);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 30% 30% / 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+        
+        .anniversary {
+            display: inline-block;
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            animation: heartbeat 2s infinite;
+        }
+        
+        /* Section message principal */
+        .love-letter {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .love-letter::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 6rem;
+            color: rgba(230, 109, 137, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .letter-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Compteur d'amour */
+        .love-counter {
+            background: linear-gradient(135deg, #f8c1c9, #e66d89);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .counter-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .counter-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Moments spéciaux */
+        .our-moments {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #cc5476;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #e66d89, transparent);
+            margin: 0.5rem auto 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            color: rgba(230, 109, 137, 0.3);
+            pointer-events: none;
+            animation: float 8s linear infinite;
+            z-index: 10;
+        }
+        
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            color: #cc5476;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signature {
+            font-size: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            margin-top: 1rem;
+        }
+        
+        /* Styles pour les galeries médias */
+        .media-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            background: #fff;
+            max-width: 100%;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-video {
+            width: 100%;
+            display: block;
+        }
+        
+        .memory-box {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-title {
+            font-size: 1.3rem;
+            color: #cc5476;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .memory-description {
+            font-style: italic;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .photo-frame {
+            border: 8px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transform: rotate(-3deg);
+            margin: 1.5rem 0;
+            max-width: 100%;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .photo-frame:hover {
+            transform: rotate(0) scale(1.02);
+        }
+        
+        .photo-frame img {
+            display: block;
+            max-width: 100%;
+        }
+        
+        .video-container {
+            width: 100%;
+            max-width: 560px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        /* Élément interactive pour générer des cœurs */
+        .heart-generator {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='%23e66d89'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>") 15 15, auto;
+        }
+        
+        /* Effet de pluie de confettis-cœurs */
+        @keyframes confetti-heart-fall {
+            0% { 
+                transform: translateY(-10vh) rotate(0deg); 
+                opacity: 0.9;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(720deg); 
+                opacity: 0;
+            }
+        }
+        
+        .confetti-heart {
+            position: fixed;
+            z-index: 9;
+            opacity: 0;
+            pointer-events: none;
+            animation: confetti-heart-fall linear forwards;
+        }
+        
+        /* Média queries pour la responsivité */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .love-letter {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .counter-value {
+                font-size: 2rem;
+            }
+            
+            .media-gallery {
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .love-letter {
+                padding: 1.5rem;
+            }
+            
+            .love-letter::before {
+                font-size: 4rem;
+            }
+            
+            .counter-title {
+                font-size: 1.3rem;
+            }
+            
+            .counter-value {
+                font-size: 1.7rem;
+            }
+            
+            .counter-label {
+                font-size: 1rem;
+            }
+            
+            .memory-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="heart-loader">♥</div>
+        <div class="loading-text">Chargement de mon amour infini pour toi...</div>
+    </div>
+    
+    <!-- Élément pour générer des cœurs au clic -->
+    <div class="heart-generator" id="heartGenerator"></div>
+    
+    <!-- Contenu principal (initialement caché) -->
+    <div class="main-content" id="mainContent" style="opacity: 0;">
+        <header>
+            <div class="container">
+                <h1>Rayanatou</h1>
+                <div class="subtitle">L'amour de ma vie, ma raison d'être</div>
+                <div class="anniversary">Ensemble depuis le 14 février 2022</div>
+            </div>
+        </header>
+        
+        <div class="container">
+            <!-- Image d'introduction -->
+            <div class="photo-frame" style="max-width: 450px; margin: 2rem auto;">
+                <img src="images/bellephoto.jpg" alt="Notre plus belle photo ensemble" class="gallery-image">
+            </div>
+            
+            <section class="love-letter" id="letterContainer">
+                <div class="letter-content">
+                    <h2 class="section-title">Ma déclaration d'amour</h2>
+                    
+                    <p>Ma chère Rayanatou,</p>
+                    
+                    <p>Depuis ce jour magique du 14 février 2022 où tu as accepté d'être mienne, chaque instant à tes côtés a été un cadeau. Aujourd'hui, à travers ces mots, je veux te rappeler à quel point tu es extraordinaire et combien mon amour pour toi est profond et inébranlable.</p>
+                    
+                    <!-- Ajout d'une première photo -->
+                    <div class="photo-frame" style="float: right; max-width: 230px; margin: 0 0 15px 20px;">
+                        <img src="images/ellesouriante.jpg" alt="Toi souriante" class="gallery-image">
+                    </div>
+                    
+                    <p>Tu es entrée dans ma vie comme un rayon de soleil, illuminant même mes jours les plus sombres. Ton sourire est la première chose à laquelle je pense en me réveillant, et ton visage est la dernière image qui berce mes nuits. Entre ces deux moments, tu habites chacune de mes pensées.</p>
+                    
+                    <p>Quand je regarde dans tes yeux, j'y vois un univers entier - un futur rempli de promesses, de rires partagés, de défis surmontés ensemble. J'y vois la femme forte et remarquable que tu es, celle qui me pousse à devenir meilleur chaque jour.</p>
+                    
+                    <p>J'aime ta douceur qui réconforte mon âme. J'aime ton intelligence qui me fascine sans cesse. J'aime ta détermination qui m'inspire. J'aime ta compassion envers les autres qui me rappelle la beauté du monde. Et j'aime cette façon unique que tu as de me comprendre, parfois mieux que je ne me comprends moi-même.</p>
+                    
+                    <!-- Ajout d'une seconde photo -->
+                    <div class="photo-frame" style="float: left; max-width: 230px; margin: 0 20px 15px 0;">
+                        <img src="images/nousdeux.jpg" alt="Nous deux enlacés" class="gallery-image">
+                    </div>
+                    
+                    <p>Notre histoire n'est pas toujours facile - aucun amour véritable ne l'est. Mais chaque obstacle que nous surmontons ne fait que renforcer ce lien précieux qui nous unit. Je promets de tenir ta main dans les moments de joie comme dans les épreuves, d'être ton refuge quand tu en as besoin, et de célébrer chacune de tes victoires comme si c'était la mienne.</p>
+                    
+                    <p>Si je devais vivre mille vies, dans chacune d'elles, je chercherais à te retrouver. Si les étoiles pouvaient parler, elles raconteraient comment mon cœur s'emballe à chacun de tes regards. Si le temps pouvait s'arrêter, je choisirais de le figer dans ces moments où tu reposes paisiblement dans mes bras.</p>
+                    
+                    <p>Rayanatou, mon amour, tu n'es pas seulement la femme que j'aime - tu es ma meilleur ami, ma confidente, ma partenaire dans cette grande aventure qu'est la vie. Chaque jour passé avec toi est un privilège, et je remercie le destin de t'avoir mise sur ma route.</p>
+                    
+                    <p>Alors que nous continuons à écrire les chapitres de notre histoire ensemble, sache que mon cœur t'appartient entièrement, aujourd'hui et pour toujours. Je t'aime d'un amour qui transcende le temps et l'espace - un amour qui grandit avec chaque lever de soleil.</p>
+                    
+                    <p>Merci d'être toi. Merci d'être à mes côtés. Merci de m'aimer comme tu le fais.</p>
+                    
+                    <p>Je t'aime au-delà des mots.</p>
+                </div>
+            </section>
+            
+            
+            
+            <section class="love-counter">
+                <h3 class="counter-title">Notre amour en chiffres</h3>
+                <div class="counter-value" id="daysCounter">--</div>
+                <div class="counter-label">jours à s'aimer</div>
+                <div class="counter-value" id="hoursCounter">--</div>
+                <div class="counter-label">heures de bonheur partagé</div>
+            </section>
+            
+            <!-- Galerie de souvenirs -->
+            <div class="memory-box">
+                <h3 class="memory-title">Nos souvenirs précieux</h3>
+                <div class="media-gallery">
+                    <div class="gallery-item" style="width: 200px; height: 150px;">
+                        <img src="images/devil.jpg" alt="Notre premier rendez-vous" class="gallery-image">
+                    </div>
+                    <div class="gallery-item" style="width: 200px; height: 150px;">
+                        <img src="images/tcill.jpg" alt="Notre première sortie" class="gallery-image">
+                    </div>
+                    <div class="gallery-item" style="width: 200px; height: 150px;">
+                        <img src="images/ramdanimg.jpg" alt="Anniversaire spécial" class="gallery-image">
+                    </div>
+                    <div class="gallery-item" style="width: 200px; height: 150px;">
+                        <img src="images/habibi.jpg" alt="Vacances ensemble" class="gallery-image">
+                    </div>
+                </div>
+                <p class="memory-description">Chaque photo raconte un chapitre de notre histoire d'amour</p>
+            </div>
+            
+            <section class="our-moments">
+                <h2 class="section-title">Pourquoi je t'aime tant</h2>
+                
+                <p>Il y a tellement de raisons pour lesquelles mon cœur t'appartient :</p>
+                
+                <!-- Photo illustrant l'amour -->
+                <div class="photo-frame" style="max-width: 350px; margin: 1.5rem auto;">
+                    <img src="images/ramdanimg.jpg" alt="Moment de tendresse" class="gallery-image">
+                </div>
+                
+                <ul>
+                    <li>Pour la façon dont tu me regardes quand tu penses que je ne te vois pas</li>
+                    <li>Pour ton rire contagieux qui est devenu ma mélodie préférée</li>
+                    <li>Pour ton courage face aux défis de la vie</li>
+                    <li>Pour ta tendresse qui guérit toutes mes blessures</li>
+                    <li>Pour ta façon unique de voir le monde</li>
+                    <li>Pour ces petits gestes d'amour quotidiens que tu ne remarques même pas</li>
+                    <li>Pour nos conversations qui durent jusqu'au lever du soleil</li>
+                    <li>Pour ta présence qui fait de chaque endroit un foyer</li>
+                    <li>Pour la manière dont tu transformes mes peurs en espoir</li>
+                    <li>Pour la femme extraordinaire que tu es et celle que tu deviens chaque jour</li>
+                </ul>
+                
+                <p>Chaque moment passé avec toi est un trésor que je chéris dans mon cœur.</p>
+            </section>
+            
+            
+            <!-- Dernière galerie de photos -->
+            <div class="media-gallery" style="margin: 2.5rem 0;">
+                <div class="gallery-item" style="width: 160px; height: 120px;">
+                    <img src="images/muah.jpg" alt="Dîner romantique" class="gallery-image">
+                </div>
+                <div class="gallery-item" style="width: 160px; height: 120px;">
+                    <img src="images/waouh.jpg" alt="Balade ensemble" class="gallery-image">
+                </div>
+                <div class="gallery-item" style="width: 160px; height: 120px;">
+                    <img src="images/muah.jpg" alt="Coucher de soleil" class="gallery-image">
+                </div>
+                <div class="gallery-item" style="width: 160px; height: 120px;">
+                    <img src="images/elle.jpg" alt="Câlin sous la pluie" class="gallery-image">
+                </div>
+                <div class="gallery-item" style="width: 160px; height: 120px;">
+                    <img src="images/nousdeux.jpg" alt="Soirée cinéma" class="gallery-image">
+                </div>
+            </div>
+            
+            <footer>
+                <p>Mon amour pour toi est éternel</p>
+                <div class="signature">💕Avec tout mon cœur et mon âme - Ali💕</div>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // Tableau de symboles de cœurs
+        const heartSymbols = ['♥', '❤', '💕', '💖', '💗', '💘', '💓', '💞'];
+        const heartColors = ['#e66d89', '#cc5476', '#f8c1c9', '#e8a2b3', '#d94a74', '#f06292'];
+        
+        // Fonction pour créer un cœur flottant
+        function createFloatingHeart(x, y, isOnClick = false) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            // Choisir un symbole et une couleur aléatoire
+            const randomSymbol = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            const randomColor = heartColors[Math.floor(Math.random() * heartColors.length)];
+            
+            // Définir le style du cœur
+            heart.innerText = randomSymbol;
+            heart.style.left = (x !== undefined ? x : Math.random() * 100) + 'vw';
+            heart.style.top = (y !== undefined ? y : Math.random() * 100) + 'vh';
+            heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            heart.style.color = randomColor;
+            heart.style.opacity = Math.random() * 0.5 + 0.2;
+            
+            // Animation différente selon le contexte
+            if (isOnClick) {
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            } else {
+                heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            }
+            
+            // Ajouter au body
+            document.body.appendChild(heart);
+            
+            // Supprimer après l'animation
+            setTimeout(() => {
+                heart.remove();
+            }, parseFloat(heart.style.animationDuration) * 1000);
+        }
+        
+        // Fonction pour créer une "pluie" de cœurs
+        function createConfettiHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('confetti-heart');
+            
+            // Symbole et couleur aléatoires
+            const randomSymbol = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            const randomColor = heartColors[Math.floor(Math.random() * heartColors.length)];
+            
+            // Position et style
+            const posX = Math.random() * 100;
+            const size = Math.random() * 1.5 + 0.8;
+            const duration = Math.random() * 6 + 4;
+            
+            // Appliquer les styles
+            heart.innerText = randomSymbol;
+            heart.style.left = posX + 'vw';
+            heart.style.fontSize = size + 'rem';
+            heart.style.color = randomColor;
+            heart.style.animationDuration = duration + 's';
+            
+            // Ajouter au document
+            document.body.appendChild(heart);
+            
+            // Supprimer après l'animation
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        
+        // Fonction pour créer des cœurs flottants aléatoirement sur la page
+        function createRandomHearts() {
+            // Créer des cœurs régulièrement
+            setInterval(() => {
+                createFloatingHeart();
+            }, 400);
+            
+            // Créer une pluie de confettis-cœurs occasionnellement
+            setInterval(() => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        createConfettiHeart();
+                    }, i * 300);
+                }
+            }, 8000);
+        }
+        
+        // Calculer les jours d'amour depuis le 14 février 2022
+        function updateLoveCounters() {
+            const startDate = new Date('2022-02-14T00:00:00');
+            const now = new Date();
+            
+            // Calculer la différence en milliseconds
+            const diffTime = Math.abs(now - startDate);
+            
+            // Convertir en jours et heures
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+            
+            // Mettre à jour les compteurs
+            document.getElementById('daysCounter').textContent = diffDays.toLocaleString();
+            document.getElementById('hoursCounter').textContent = diffHours.toLocaleString();
+        }
+        
+        // Gestion des cœurs au clic
+        function setupHeartGenerator() {
+            const generator = document.getElementById('heartGenerator');
+            
+            generator.addEventListener('click', (e) => {
+                // Créer plusieurs cœurs au point de clic
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const offsetX = (Math.random() - 0.5) * 50;
+                        const offsetY = (Math.random() - 0.5) * 50;
+                        createFloatingHeart(e.clientX + offsetX, e.clientY + offsetY, true);
+                    }, i * 100);
+                }
+            });
+        }
+        
+        // Ajouter des effets spéciaux aux éléments
+        function setupSpecialEffects() {
+            // Effet sur la lettre d'amour
+            const letterContainer = document.getElementById('letterContainer');
+            letterContainer.addEventListener('mouseover', function() {
+                // Créer une rafale de cœurs
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const x = letterContainer.offsetLeft + Math.random() * letterContainer.offsetWidth;
+                        const y = letterContainer.offsetTop + Math.random() * letterContainer.offsetHeight;
+                        createFloatingHeart(x, y, true);
+                    }, i * 150);
+                }
+            });
+            
+            // Effet sur le compteur d'amour
+            const loveCounter = document.querySelector('.love-counter');
+            loveCounter.addEventListener('mouseover', function() {
+                // Créer une explosion de cœurs
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const centerX = loveCounter.offsetLeft + loveCounter.offsetWidth / 2;
+                        const centerY = loveCounter.offsetTop + loveCounter.offsetHeight / 2;
+                        const angle = (Math.PI * 2 * i) / 10;
+                        const radius = 50;
+                        const x = centerX + Math.cos(angle) * radius;
+                        const y = centerY + Math.sin(angle) * radius;
+                        createFloatingHeart(x, y, true);
+                    }, i * 100);
+                }
+            });
+        }
+        
+        // Gestion de l'écran de chargement
+        function handleLoadingScreen() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Simuler un temps de chargement pour l'effet
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                mainContent.style.opacity = '1';
+                mainContent.style.transition = 'opacity 1s ease-in';
+                
+                // Supprimer l'écran de chargement après la transition
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 1000);
+            }, 2000);
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            handleLoadingScreen();
+            createRandomHearts();
+            updateLoveCounters();
+            setupHeartGenerator();
+            setupSpecialEffects();
+            
+            // Mettre à jour les compteurs toutes les heures
+            setInterval(updateLoveCounters, 3600000);
+        });
+    </script>
+</body>
+</html>
